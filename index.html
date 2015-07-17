@@ -1,72 +1,23 @@
-<html ng-app="bacheloretteApp">
-  <head>
-    <script src="js/vendor/angular.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/directives.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-  </head>
-  <body >
-    <div class="background">
-      <!-- <table class="test"  cellspacing="10">
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      	<tr>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      		<td></td>
-      	</tr>
-      </table> -->
-      <table >
-      	{{message}}{{1+2}}
-      </table>
-    </div>
-  </body>
+<!doctype html>
+<html lang="en" ng-app="connectFourApp">
+<head>
+  <meta charset="utf-8">
+  <title>Bachelorette</title>
+  <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
+  <link rel="stylesheet" href="css/index.css">
+  <script src="js/vendor/angular.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/services.js"></script>
+</head>
+<body ng-controller="gameController as game">
+   <table>
+    <tr ng-repeat="row in game.board" >
+      <td ng-repeat="column in row track by $index"ng-click="game.selectColumn($index)"></td>
+    </tr>
+   </table>
+
+</body>
 </html>
