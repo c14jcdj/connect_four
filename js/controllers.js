@@ -20,11 +20,20 @@ connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFact
     
     _this.board = board.gameBoard;
 
-    var checkForWinner = function (emptySlot) {
-      var row = emptySlot[0]
-      var column = emptySlot[1]
-      board.checkFourAcross(row)
-      board.checkFourDown()
+    var checkForWinner = function () {
+      for(var i = 0, ii = board.rows;i<ii; i++){
+        if(board.checkFourAcross(i)){
+          alert('winner')
+          return;
+        }
+      }
+
+      for(var j = 0, jj = board.columns; j < jj ; j++){
+        if(board.checkFourDown(j)){
+          alert('winner')
+          return;
+        }
+      }
       board.checkFourDiagonal()
     }
     _this.selectColumn = function(column){

@@ -18,7 +18,6 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
 
       this.isSlotEmpty = function (column, row) {
         return this.gameBoard[row][column] == undefined ? true : false;
-
       }
 
       this.checkColumnForEmptySlots = function (column) {
@@ -49,13 +48,40 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
 
       this.checkFourAcross = function  (row) {
         var row = this.gameBoard[row]
-        for(var i = 0, ii = row.length; i < ii; i++){
-          console.log(row[i])
+        var color = row[0] ? row[0].color : 'white';
+        var piecesInARow = 1;
+        for(var i = 1, ii = row.length; i < ii; i++){
+          if(row[i] != undefined){
+            if(row[i].color == color){
+              piecesInARow +=1;
+            } else {
+              color = row[i].color
+              piecesInARow = 1;
+            } 
+          }
+          
         }
+          return piecesInARow >= 4;
         
       }
-      this.checkFourDown = function  (argument) {
-        console.log('checking down')
+      this.checkFourDown = function  (column) {
+
+        var color = this.gameBoard[0][column] ? this.gameBoard[0][column].color : 'white';
+        var piecesInARow = 1;
+        for(var i = 1, ii=this.rows; i<ii; i++){
+          console.log(color)
+          if(this.gameBoard[i][column] != undefined){
+            if(this.gameBoard[i][column].color == color){
+              piecesInARow +=1
+            }else {
+              color = this.gameBoard[i][column].color
+              piecesInARow = 1;
+            }
+          }
+
+        }
+
+        return piecesInARow >= 4;
       }
       this.checkFourDiagonal = function  (argument) {
         console.log('checking diag')
