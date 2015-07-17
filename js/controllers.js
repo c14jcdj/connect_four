@@ -7,25 +7,45 @@ var connectFourControllers = angular.module('connectFourControllers', []);
 
 
 
-connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFactory',
-  function(boardFactory, pieceFactory) {
+connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFactory', 'playerFactory',
+  function(boardFactory, pieceFactory, playerFactory) {
     var _this = this;
     var board = new boardFactory.Board(7,6);
+    var player1 = new playerFactory.Player('player1', 'blue', true)
+    var player2 = new playerFactory.Player('player2', 'red', false)
 
     var turn = 1;
     
-    function isOdd(num) { return num % 2;}
+    
     
     _this.board = board.gameBoard;
+
+    var checkForWinner = function (emptySlot) {
+      var row = emptySlot[0]
+      var column = emptySlot[1]
+      board.checkFourAcross(row)
+      board.checkFourDown()
+      board.checkFourDiagonal()
+    }
     _this.selectColumn = function(column){
 
       var emptySlot = board.checkColumnForEmptySlots(column)
-      var player = isOdd(turn) ? 'player1' : 'player2'
-      var color = player == 'player1' ? 'blue' : 'red'
-      var piece = new pieceFactory.Piece(player, color)
+      function isOdd(num) { return num % 2;}
+      var player = isOdd(turn) ? player1 : player2
+      var piece = new pieceFactory.Piece(player)
+      if(emptySlot) {
+        board.insertGamePiece(piece, emptySlot)
+        turn += 1;
 
-      board.insertGamePiece(piece, emptySlot);
-      turn += 1;
+      } else {
+         _this.message = 'Column Full! Try another column'
+      }  
+
+      if(turn >7){
+        checkForWinner(emptySlot)
+      }
+
+      
     } 
 
     board.selectColumn;

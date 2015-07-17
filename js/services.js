@@ -47,6 +47,20 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
 
       }
 
+      this.checkFourAcross = function  (row) {
+        var row = this.gameBoard[row]
+        for(var i = 0, ii = row.length; i < ii; i++){
+          console.log(row[i])
+        }
+        
+      }
+      this.checkFourDown = function  (argument) {
+        console.log('checking down')
+      }
+      this.checkFourDiagonal = function  (argument) {
+        console.log('checking diag')
+      }
+
     }
 
 
@@ -57,13 +71,28 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
 
 connectFourServices.factory('pieceFactory', ['$http', function($http) {
 
-      function Piece (player, color) {
+      function Piece (player) {
         this.player = player;
-        this.color = color;
+        this.color = player.color;
       }
     
        return {
     Piece:Piece
+   }
+}]);
+
+connectFourServices.factory('playerFactory', ['$http', function($http) {
+
+      function Player (name, color, first) {
+        this.name = name;
+        this.color = color;
+        this.first = first;
+
+        
+      }
+    
+       return {
+    Player:Player
    }
 }]);
 
