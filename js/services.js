@@ -39,7 +39,7 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
       }
 
       this.insertGamePiece = function (piece, emptySlot) {
-        
+
         var row = emptySlot[0],
             column = emptySlot[1];
         
@@ -52,6 +52,18 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
 
    return {
     Board:Board
+   }
+}]);
+
+connectFourServices.factory('pieceFactory', ['$http', function($http) {
+
+      function Piece (player, color) {
+        this.player = player;
+        this.color = color;
+      }
+    
+       return {
+    Piece:Piece
    }
 }]);
 
