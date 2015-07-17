@@ -31,8 +31,11 @@ connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFact
         alert('winner');
         return;
       }
+      if(board.checkFourDiagonal(emptySlot)){
+        alert('winner');
+        return;
+      }
       
-      board.checkFourDiagonal()
     }
     _this.selectColumn = function(column){
 
