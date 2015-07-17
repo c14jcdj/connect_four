@@ -145,7 +145,7 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
             row -= 1;
             column -= 1; 
 
-            while(row - 1 >= 0 && column - 1 >= 0 ){
+            while(row - 1 >= 0 && column >= 0 ){
               console.log('row '+row+' column '+column+'')
               console.log('control color ' +color)
               if(gameBoard[row][column] != undefined){
