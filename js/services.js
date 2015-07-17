@@ -84,7 +84,7 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
         return piecesInARow >= 4;
       }
       this.checkFourDiagonal = function  (argument) {
-        console.log('checking diag')
+        
       }
 
     }
