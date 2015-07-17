@@ -15,7 +15,7 @@
 <body ng-controller="gameController as game">
    <table>
     <tr ng-repeat="row in game.board" >
-      <td ng-repeat="column in row track by $index"ng-click="game.selectColumn($index)"></td>
+      <td ng-repeat="column in row track by $index" ng-class="{'active' : column.color }"ng-click="game.selectColumn($index)"></td>
     </tr>
    </table>
 

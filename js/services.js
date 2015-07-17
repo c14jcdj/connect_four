@@ -7,20 +7,44 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
       this.gameBoard = [];
 
       this.init = function () {
-        var columns = this.columns,
-            rows = this.rows,
-            gameBoard = this.gameBoard;
 
         //Create new board with empty slots
-        for(var i=0, ii = rows; i < ii ; i++){
+        for(var i=0, ii = this.rows; i < ii ; i++){
           var array = new Array(7);
-          gameBoard.push(array)
+          this.gameBoard.push(array)
         }
 
       }
 
-      this.selectColumn = function (index) {
-        alert(index)
+      this.isSlotEmpty = function (column, row) {
+        return this.gameBoard[row][column] == undefined ? true : false;
+
+      }
+
+      this.checkColumnForEmptySlots = function (column) {
+
+        var rows = this.rows;
+        var emptySlot;
+
+        //Check column from bottom up if there is an empty slot
+        for(var row=this.rows -1; row >= 0; row--){
+          if(this.isSlotEmpty(column, row)){
+            emptySlot = [row, column]
+            break;
+          }
+        }
+
+        return emptySlot;
+          
+      }
+
+      this.insertGamePiece = function (piece, emptySlot) {
+        
+        var row = emptySlot[0],
+            column = emptySlot[1];
+        
+        this.gameBoard[row][column] = piece;
+
       }
 
     }
