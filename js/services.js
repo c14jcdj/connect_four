@@ -1,6 +1,6 @@
 var connectFourServices = angular.module('connectFourApp');
 
-connectFourServices.factory('boardFactory', ['$http', function($http) {
+connectFourServices.factory('boardFactory', [ function() {
     
   function Board(columns, rows){
     this.columns = columns;
@@ -13,6 +13,21 @@ connectFourServices.factory('boardFactory', ['$http', function($http) {
       for(var i=0, ii = this.rows; i < ii ; i++){
         this.gameBoard.push(new Array(7))
       }
+
+    }
+
+    this.clearBoard = function(ctrl){
+
+      //Remove Piece Objects from board 
+      for(var i=0, ii = this.rows; i < ii ; i++){
+        for(var j = 0, jj = this.columns; j < jj; j++){
+          this.gameBoard[i][j] = undefined;
+        }
+      }
+
+      //Reset values for turn and player
+      ctrl.turn = 1;
+      ctrl.playerTurn ='Player 1'
 
     }
 
@@ -230,22 +245,28 @@ connectFourServices.factory('gameFactory', [ function() {
 
   function Game () {
 
-    this.checkForWinner = function (board,emptySlot) {
+    this.checkForWinner = function (board,emptySlot,ctrl) {
       var row = emptySlot[0],
           column = emptySlot[1];
 
       if(board.checkFourAcross(row) ){
-        alert('winner across ' + row);
+        this.winnerModal(ctrl)
         return;
       }
       if(board.checkFourDown(column)){
-        alert('winner down' + column);
+        this.winnerModal(ctrl)
         return;
       }
       if(board.checkFourDiagonal(emptySlot)){
-        alert('winner dia' + emptySlot );
+        this.winnerModal(ctrl)
         return;
       }
+    }
+
+    this.winnerModal= function(ctrl){
+      $('.board-overlay').css('width', '100%')
+      ctrl.showWinnerMessage = true;
+      ctrl.showRestartButton = true;
     }
 
     this.isOdd = function (num) {
@@ -255,20 +276,54 @@ connectFourServices.factory('gameFactory', [ function() {
     this.columnSelected = function(ctrl,column){
       var emptySlot = ctrl.board.checkColumnForEmptySlots(column),
           player = this.isOdd(ctrl.turn) ? ctrl.player1 : ctrl.player2,
+          playerTurn = this.isOdd(ctrl.turn) ? ctrl.player2 : ctrl.player1,
           piece = new ctrl.pieceFactory.Piece(player);
           addGamePiece = function(){
             ctrl.board.insertGamePiece(piece, emptySlot)
             ctrl.turn += 1;
+            ctrl.playerTurn = playerTurn.name
           },
           displayErrorMessage = function(){
+            ctrl.messageRed = true;
             ctrl.message = 'Column Full! Try another column'   
-          };
+          },
+          resetErrorMessage = function(){
+            ctrl.messageRed = false;
+            ctrl.message = 'Click on any column to place a token in the slot'   
+          },
+          updateWinner = function(){
+            ctrl.winner = player;
+          }
 
-        
-      emptySlot ? addGamePiece() : displayErrorMessage()
+      resetErrorMessage();
+      emptySlot ? addGamePiece() : displayErrorMessage();
 
       // Start checking for winner after turn 7
-      if(ctrl.turn >7){ this.checkForWinner(ctrl.board,emptySlot) }
+      updateWinner();
+      if(ctrl.turn >7){ this.checkForWinner(ctrl.board,emptySlot, ctrl) };
+    }
+
+    this.columnHover = function (ctrl,column) {
+      column += 1;
+      ctrl.hoverMessage = 'Dropping Token in Column: ' + column ;
+    }
+
+    this.removeBoardOverlay = function (ctrl) {
+      ctrl.showPrompts = true;
+         $('.board-overlay, .board-pic').animate({
+          width: 0
+        }, 2000);
+       $('.rules-container button').animate({ opacity: 0 }, 1000)
+       $('.prompts').animate({ opacity: 1 }, 2000)
+    }
+
+    this.restart = function (ctrl) {
+      $('.board-overlay').animate({
+          width: 0
+        }, 2000);
+      ctrl.showWinnerMessage = false;
+      ctrl.showRestartButton = false;
+      ctrl.board.clearBoard(ctrl)
     }
   }
   

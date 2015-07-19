@@ -1,7 +1,24 @@
+body{
+	margin: 0;
+}
+
+.container {
+	max-width: 1300px;
+	position: absolute;
+	left: 0;
+	top:0;
+	bottom:0;
+	right:0;
+	margin: 0 auto;
+}
+
+/*Table*/
+
 table {
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	-webkit-transform:translate(-50%,-50%);
 	transform:translate(-50% ,-50%);
 	box-shadow: 7px 7px 5px 0px black; 
 	border:3px solid black;
@@ -10,6 +27,7 @@ table {
 
 table:not(td){
 	background-color: yellow;
+	padding: 10px;
 }
 
 td {
@@ -21,6 +39,101 @@ td {
 	height: 75px;
 }
 
+/*Rules Container*/
+
+.rules-container {
+	position:absolute; 
+	width: 35%; 
+	left:0; 
+	height: 100%; 
+	background-color:rgba(0,0,0,.9);
+	text-align: left;
+	color:white;
+}
+
+.rules-container div {
+	padding: 15px 25px;
+	font-size: 1.3em;
+}
+
+.rules-container h1 {
+	text-align: center;
+	margin: 50px 0 ;
+	font-size: 5.5em;
+}
+
+.rules-container button {
+	position: absolute;
+	left: 50%;
+	top: 350px;
+	font-size: 1.2em;
+	transform:translateX(-50%);
+	width: 200px;
+	height:100px;
+	background-color: white;
+	color: black;
+}
+
+.prompts {
+	opacity: 0;
+}
+
+/*Board Container*/
+
+.board-container {
+	position:absolute; 
+	width: 65%; 
+	right:0; 
+	height: 100%; 
+	background-color:white;
+	border-left: 5px solid black; 
+}
+
+.board-overlay, .board-pic {
+	position: absolute;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom:0;
+	background-color: rgba(0,0,0,.9);
+}
+
+.board-overlay {
+	z-index: 3;
+}
+
+.board-pic {
+	z-index: 2;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('https://static.squarespace.com/static/530e8030e4b059649e495bd0/53114af5e4b0390aa5ca6ad8/53114af7e4b0390aa5ca759d/1295469909327/WindowsLiveWriter-ConnectFour_127A4-') 
+}
+
+/*Winner Text*/
+
+.winner-text {
+	font-size: 2em; 
+	color:white;
+	position: absolute;
+	top: 50%;
+	margin: 0;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+
+}
+
+.winner-text button {
+	width: 200px;
+	height:100px;
+	background-color: white;
+	color: black;
+	font-size: 1.2em;
+}
+
+
+/*Colors*/
 
 .blue {
 	background-color: blue;
@@ -32,4 +145,11 @@ td {
 
 .white {
 	background-color: white;
+}
+
+.red-color {
+	color: red;
+}
+.white-color{
+	color: white;
 }
