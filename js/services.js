@@ -134,7 +134,6 @@ connectFourServices.factory('boardFactory', [ function() {
       //Set base coordinates to start diagonal search
       baseCoordinatesLeftDiagonal = findBaseCoordinates('left'),
       baseCoordinatesRightDiagonal = findBaseCoordinates('right');
-      
       //Check for four in a row starting from base coordinates
       if(checkForFourPiecesInARow(baseCoordinatesLeftDiagonal, 'right')){ return true };
       if(checkForFourPiecesInARow(baseCoordinatesRightDiagonal, 'left')){ return true };
@@ -167,13 +166,11 @@ connectFourServices.factory('boardFactory', [ function() {
           },
           linearCheck = function (){
             for(var i = 1, ii = maxLength; i < ii; i++){
-              if(iterator[i]){
-                //Determine iterator to use: check if there is an option on object(column vs row)
-                var iteratorToUse = obj.option != undefined ? iterator[i][obj.option] : iterator[i]
-
-                //If there is a piece, check for color; if not reset color back to default
-                iteratorToUse ? checkColor(iteratorToUse) : resetColorToDefault()
-              }
+              //Determine iterator to use: check if there is an option on object(column vs row)
+              var iteratorToUse = obj.option !== undefined ? iterator[i][obj.option] : iterator[i]
+              //If there is a piece, check for color; if not reset color back to default
+              iteratorToUse ? checkColor(iteratorToUse) : resetColorToDefault()
+              if(piecesInARow >= 4){return}
             }
           },
           diagonalCheck = function (){
