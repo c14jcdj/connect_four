@@ -1,11 +1,20 @@
 var connectFourDirectives = angular.module('connectFourDirectives', []);
 
-connectFourDirectives.directive('fantasySuites', function() {
+connectFourDirectives.directive('rulesContainer', function() {
       return {
           restrict: 'E',
-          templateUrl: 'partials/fantasy_suites.html',
-          controller: 'fantasySuitesController',
-          controllerAs: 'fantasy'
+          templateUrl: 'templates/rules_container.html',
+          controller: 'gameController',
+          controllerAs: 'game'
+      };
+ });
+
+connectFourDirectives.directive('boardContainer', function() {
+      return {
+          restrict: 'E',
+          templateUrl: 'templates/board_container.html',
+          controller: 'gameController',
+          controllerAs: 'game'
       };
  });
 

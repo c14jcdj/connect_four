@@ -2,8 +2,8 @@
 <html lang="en" ng-app="connectFourApp">
 <head>
   <meta charset="utf-8">
-  <title>Bachelorette</title>
-  <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
+  <title>Connect Four</title>
+  <link href='http://fonts.googleapis.com/css?family=Black+Ops+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/index.css">
   <script src="js/vendor/angular.js"></script>
   <script src="js/vendor/jquery.js"></script>
@@ -14,32 +14,8 @@
 </head>
 <body ng-controller="gameController as game">
   <div class="container">
-    <div class="rules-container" >
-        <h1>Connect Four</h1>
-      <div class="prompts" ng-show="game.showPrompts">
-        <div>Turn: {{game.playerTurn}}</div>
-        <div>{{game.hoverMessage}}</div>
-        <div ng-class="game.messageRed ? 'red-color' : 'white-color'">{{game.message}}</div>
-      </div>
-        <button ng-click="game.startGame(game)">Start Game</button>
-    </div>
-    <div class="board-container" >
-      <div class="board-overlay" ng-show="game.showOverlay">
-        <div ng-show="game.showWinnerMessage">
-          <div class="winner-text">
-            <h1 >{{game.winner.name}} Wins!</h1> 
-            <button ng-click="game.restart(game)">Restart</button>
-          </div>
-        </div>
-      </div>
-      <div class="board-pic" ng-show="game.showOverlay"></div>
-      <table>
-      <tr ng-repeat="row in game.gameBoard" >
-        <td ng-mouseover="game.columnHover(game,$index)" ng-repeat="column in row track by $index" ng-class="column.color ? column.color : 'white' "ng-click="game.columnSelected(game,$index)"></td>
-      </tr>
-     </table>
-    </div>
+    <rules-container></rules-container>
+    <board-container></board-container>
   </div>
-
 </body>
 </html>

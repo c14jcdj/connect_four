@@ -1,11 +1,6 @@
 'use strict';
 
-/* Controllers */
-
 var connectFourControllers = angular.module('connectFourControllers', []);
-
-
-
 
 connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFactory', 'playerFactory', 'gameFactory',
   function(boardFactory, pieceFactory, playerFactory, gameFactory) {
@@ -30,18 +25,20 @@ connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFact
         player2 = new playerFactory.Player('Player 2', 'red', false),
         turn = 1;
 
-    _this.game = game;
-    _this.gameBoard = board.gameBoard;
-    _this.board = board;
-    _this.player1 = player1;
-    _this.player2 = player2;
-    _this.turn = turn;
-    _this.playerTurn = 'Player 1'
-    _this.message = 'Click on any column to place a token in the slot'
-    _this.messageRed = false;
-    _this.showWinnerMessage = false;
-    _this.hoverMessage = 'Dropping Token in Column: ';
-    _this.pieceFactory = pieceFactory;
+      _this.game = game;
+      _this.gameBoard = board.gameBoard;
+      _this.board = board;
+      _this.player1 = player1;
+      _this.player2 = player2;
+      _this.turn = turn;
+      _this.playerTurn = 'Player 1'
+      _this.message = 'Click on any column to place a token in the slot'
+      _this.messageRed = false;
+      _this.showWinnerMessage = false;
+      _this.hoverMessage = 'Dropping Token in Column: ';
+      _this.pieceFactory = pieceFactory;
+
+      //Remove Overlay and initialize the gameboard
       game.removeBoardOverlay(ctrl)
       board.init();
     }

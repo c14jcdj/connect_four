@@ -264,6 +264,8 @@ connectFourServices.factory('gameFactory', [ function() {
     }
 
     this.winnerModal= function(ctrl){
+
+      //Show winner modal text
       $('.board-overlay').css('width', '100%')
       ctrl.showWinnerMessage = true;
       ctrl.showRestartButton = true;
@@ -309,18 +311,24 @@ connectFourServices.factory('gameFactory', [ function() {
     }
 
     this.removeBoardOverlay = function (ctrl) {
+
+      //Remove overlay and show game prompts
       ctrl.showPrompts = true;
-         $('.board-overlay, .board-pic').animate({
-          width: 0
-        }, 2000);
-       $('.rules-container button').animate({ opacity: 0 }, 1000)
-       $('.prompts').animate({ opacity: 1 }, 2000)
+      $('.board-overlay, .board-pic').animate({
+        width: 0
+      }, 2000);
+      $('.rules-container button').animate({ opacity: 0 }, 1000)
+      $('.prompts').animate({ opacity: 1 }, 2000)
     }
 
     this.restart = function (ctrl) {
+
+      //Remove Overlay
       $('.board-overlay').animate({
-          width: 0
-        }, 2000);
+        width: 0
+      }, 2000);
+
+      //Hide text, buttons and clear board
       ctrl.showWinnerMessage = false;
       ctrl.showRestartButton = false;
       ctrl.board.clearBoard(ctrl)

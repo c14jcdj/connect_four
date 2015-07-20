@@ -1,5 +1,6 @@
 body{
 	margin: 0;
+	font-family: 'Black Ops One', cursive;
 }
 
 .container {
@@ -72,6 +73,14 @@ td {
 	height:100px;
 	background-color: white;
 	color: black;
+	font-family: 'Black Ops One', cursive;
+}
+
+.rules-container h1 span:first-child, .winner-text span:first-child{
+	color: rgba(255,0,0,.7);
+}
+.rules-container h1 span:nth-child(2), .winner-text span:nth-child(2){
+	color: rgba(0,0,255,.7)
 }
 
 .prompts {
@@ -130,6 +139,7 @@ td {
 	background-color: white;
 	color: black;
 	font-size: 1.2em;
+	font-family: 'Black Ops One', cursive;
 }
 
 

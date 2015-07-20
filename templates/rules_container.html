@@ -1,0 +1,9 @@
+<div class="rules-container" >
+	<h1><span>Connect </span><span>Four</span> </h1>
+    <div class="prompts" ng-show="game.showPrompts">
+	    <div>Turn: {{game.playerTurn}}</div>
+	    <div>{{game.hoverMessage}}</div>
+	    <div ng-class="game.messageRed ? 'red-color' : 'white-color'">{{game.message}}</div>
+    </div>
+    <button ng-click="game.startGame(game)">Start Game</button>
+</div>
