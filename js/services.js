@@ -163,6 +163,7 @@ connectFourServices.factory('boardFactory', [ function() {
             piecesInARow +=1;
           },
           checkColor = function (piece){
+            
             //If piece color is equal to control color increment var, if not reset var and color
             piece.color && piece.color == color ? incrementPiecesInARowVar() : resetControlToNewColor(piece);
           },
@@ -187,24 +188,30 @@ connectFourServices.factory('boardFactory', [ function() {
                 gameBoard = obj.gameBoard,
                 direction = obj.direction,
                 columns = obj.columns,
-                columnBoundary,
                 incrementDiagonal = function (direction){
+                  var numToIncrementBy = direction == 'right' ? 1 : -1;
                   row -= 1;
-                  direction == 'right' ? column += 1 : column -= 1;
+                  column += numToIncrementBy;
+                },
+                checkDiagonalUpAndRight = function (){
+                  while(row >= 0 && column + 1 < columns ){
+                    //If there is a piece, check for color; if not reset color back to default
+                    gameBoard[row][column] ? checkColor(gameBoard[row][column]) : resetColorToDefault();
+                    incrementDiagonal('right');
+                  }
+                },
+                checkDiagonalUpAndLeft = function () {
+                  while(row >= 0 && column >= 0 ){
 
-                  //Sets max column or min column depending on direction
-                  columnBoundary = direction == 'right' ? (column + 1 < columns) : column >=0;
-                }
+                    //If there is a piece, check for color; if not reset color back to default
+                    gameBoard[row][column] ? checkColor(gameBoard[row][column]) : resetColorToDefault();
+                    incrementDiagonal('left');
+                  }
+                };
 
-            //Increment to next spot to start checking color since control color is set to base coordinate color
+            // //Increment to next spot to start checking color since control color is set to base coordinate color
             direction == 'right' ? incrementDiagonal('right') : incrementDiagonal('left')
-
-            while(row - 1 >= 0 && columnBoundary ){
-              //If there is a piece, check for color; if not reset color back to default
-              gameBoard[row][column] ? checkColor(gameBoard[row][column]) : resetColorToDefault()
-              direction == 'right' ? incrementDiagonal('right') : incrementDiagonal('left')
-            }
-
+            direction == 'right' ? checkDiagonalUpAndRight() : checkDiagonalUpAndLeft();
           };
       
       obj.checkType == 'linear' ? linearCheck() : diagonalCheck();
