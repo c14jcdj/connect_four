@@ -98,13 +98,20 @@ connectFourServices.factory('boardFactory', [ function() {
           findBaseCoordinates = function (diagonalType){
             var row = coordinates[0],
                 column = coordinates[1],
-                columnBoundary = diagonalType == 'left' ? (column > 0) : (column < columns -1); 
+                incrementDownAndLeft = function () {
+                  while(row < rows - 1 && column > 0){
+                    row += 1;
+                    column -=1 
+                  }
+                },
+                incrementDownAndRight = function(){
+                  while(row < rows - 1 && column < columns -1){
+                    row += 1;
+                    column += 1;
+                  }
+                }
+                diagonalType == 'left' ? incrementDownAndLeft() : incrementDownAndRight();
             
-            while(row < rows - 1 && columnBoundary){
-              row += 1;
-              diagonalType == 'left'? column -=1 : column += 1;
-            }
-
             return [row, column]
           },
           checkForFourPiecesInARow = function (coordinates, direction) {
@@ -134,6 +141,7 @@ connectFourServices.factory('boardFactory', [ function() {
       //Set base coordinates to start diagonal search
       baseCoordinatesLeftDiagonal = findBaseCoordinates('left'),
       baseCoordinatesRightDiagonal = findBaseCoordinates('right');
+
       //Check for four in a row starting from base coordinates
       if(checkForFourPiecesInARow(baseCoordinatesLeftDiagonal, 'right')){ return true };
       if(checkForFourPiecesInARow(baseCoordinatesRightDiagonal, 'left')){ return true };
