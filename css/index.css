@@ -69,6 +69,7 @@ td {
 	top: 350px;
 	font-size: 1.2em;
 	transform:translateX(-50%);
+	-webkit-transform:translateX(-50%);
 	width: 200px;
 	height:100px;
 	background-color: white;
@@ -127,7 +128,7 @@ td {
 	top: 50%;
 	margin: 0;
 	left: 50%;
-	transform:translate(-50%,-50%);
+	-webkit-transform:translate(-50%,-50%);
 	transform: translate(-50%, -50%);
 	text-align: center;
 
