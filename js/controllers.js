@@ -21,7 +21,7 @@ connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFact
 
       var game = new gameFactory.Game(),
         board = new boardFactory.Board(7,6),
-        player1 = new playerFactory.Player('Player 1', 'blue', true),
+        player1 = new playerFactory.Player('Player 1', 'black', true),
         player2 = new playerFactory.Player('Player 2', 'red', false),
         turn = 1;
 
