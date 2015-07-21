@@ -141,7 +141,7 @@ connectFourServices.factory('boardFactory', [ function() {
       //Set base coordinates to start diagonal search
       baseCoordinatesLeftDiagonal = findBaseCoordinates('left'),
       baseCoordinatesRightDiagonal = findBaseCoordinates('right');
-
+      
       //Check for four in a row starting from base coordinates
       if(checkForFourPiecesInARow(baseCoordinatesLeftDiagonal, 'right')){ return true };
       if(checkForFourPiecesInARow(baseCoordinatesRightDiagonal, 'left')){ return true };
@@ -163,7 +163,6 @@ connectFourServices.factory('boardFactory', [ function() {
             piecesInARow +=1;
           },
           checkColor = function (piece){
-            
             //If piece color is equal to control color increment var, if not reset var and color
             piece.color && piece.color == color ? incrementPiecesInARowVar() : resetControlToNewColor(piece);
           },
@@ -198,6 +197,7 @@ connectFourServices.factory('boardFactory', [ function() {
                     //If there is a piece, check for color; if not reset color back to default
                     gameBoard[row][column] ? checkColor(gameBoard[row][column]) : resetColorToDefault();
                     incrementDiagonal('right');
+                    if(piecesInARow >= 4){return};
                   }
                 },
                 checkDiagonalUpAndLeft = function () {
@@ -206,6 +206,7 @@ connectFourServices.factory('boardFactory', [ function() {
                     //If there is a piece, check for color; if not reset color back to default
                     gameBoard[row][column] ? checkColor(gameBoard[row][column]) : resetColorToDefault();
                     incrementDiagonal('left');
+                    if(piecesInARow >= 4){return};
                   }
                 };
 
