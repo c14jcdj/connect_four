@@ -6,6 +6,12 @@
         <button ng-click="game.restart(game)">Restart</button>
       </div>
     </div>
+    <div ng-show="game.showDrawMessage">
+      <div class="winner-text">
+        <h1 ><span> Draw!</span> </h1> 
+        <button ng-click="game.restart(game)">Restart</button>
+      </div>
+    </div>
   </div>
   <div class="board-pic" ng-show="game.showOverlay"></div>
   <table>

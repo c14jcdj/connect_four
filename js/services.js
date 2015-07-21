@@ -141,7 +141,7 @@ connectFourServices.factory('boardFactory', [ function() {
       //Set base coordinates to start diagonal search
       baseCoordinatesLeftDiagonal = findBaseCoordinates('left'),
       baseCoordinatesRightDiagonal = findBaseCoordinates('right');
-      
+
       //Check for four in a row starting from base coordinates
       if(checkForFourPiecesInARow(baseCoordinatesLeftDiagonal, 'right')){ return true };
       if(checkForFourPiecesInARow(baseCoordinatesRightDiagonal, 'left')){ return true };
@@ -263,24 +263,33 @@ connectFourServices.factory('gameFactory', [ function() {
           column = emptySlot[1];
 
       if(board.checkFourAcross(row) ){
-        this.winnerModal(ctrl)
+        this.showModal(ctrl, 'winner')
         return;
       }
       if(board.checkFourDown(column)){
-        this.winnerModal(ctrl)
+        this.showModal(ctrl, 'winner')
         return;
       }
       if(board.checkFourDiagonal(emptySlot)){
-        this.winnerModal(ctrl)
+        this.showModal(ctrl, 'winner')
         return;
+      }
+
+      if(ctrl.turn -1 >= board.rows * board.columns){
+        this.showModal(ctrl,'draw');
       }
     }
 
-    this.winnerModal= function(ctrl){
 
-      //Show winner modal text
+
+    this.showModal= function(ctrl, type){
+      //Show winner modal or text
       $('.board-overlay').css('width', '100%')
-      ctrl.showWinnerMessage = true;
+      if(type == 'winner'){
+        ctrl.showWinnerMessage = true;
+      } else {
+        ctrl.showDrawMessage = true;
+      }
       ctrl.showRestartButton = true;
     }
 
@@ -343,6 +352,7 @@ connectFourServices.factory('gameFactory', [ function() {
 
       //Hide text, buttons and clear board
       ctrl.showWinnerMessage = false;
+      ctrl.showDrawMessage = false;
       ctrl.showRestartButton = false;
       ctrl.board.clearBoard(ctrl)
     }

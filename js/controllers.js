@@ -35,6 +35,7 @@ connectFourControllers.controller('gameController', [ 'boardFactory', 'pieceFact
       _this.message = 'Click on any column to place a token in the slot'
       _this.messageRed = false;
       _this.showWinnerMessage = false;
+      _this.showDrawMessage = false;
       _this.hoverMessage = 'Dropping Token in Column: ';
       _this.pieceFactory = pieceFactory;
 
